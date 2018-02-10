@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import visualisation as vis
 import random
-
+import classifier as clas
 def processFeatures(train):
 
 
@@ -30,5 +30,5 @@ def processFeatures(train):
 if __name__ == "__main__":
     train = ps.read_csv("data/train.csv")
     train = processFeatures(train)
-
+    #clas.learn(train)
     vis.Visualize(train, "Survived")
