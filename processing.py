@@ -6,9 +6,8 @@ import matplotlib.pyplot as plt
 import visualisation as vis
 import random
 import classifier as clas
+
 def processFeatures(train):
-
-
 	#calculate mean age
     ageAvr= train["Age"].mean()
     ageStd= train["Age"].std()
@@ -22,13 +21,16 @@ def processFeatures(train):
     train['Sex'] = train['Sex'].map({'female': 0, 'male': 1}).astype(int)
     train['Embarked'] = train['Embarked'].map({'S': 0, 'C': 1, 'Q': 2 , None:random.randint(-1,2)}).astype(int)
     train['Cabin'] = train['Cabin'].apply(lambda x: 0 if type(x) == float else 1)
+
     dropElements = ['PassengerId', 'Name', 'Ticket']
     train =  train.drop(dropElements, axis=1)
+
     print(train.head(10))
     return train
 
 if __name__ == "__main__":
     train = ps.read_csv("data/train.csv")
     train = processFeatures(train)
-    #clas.learn(train)
-    vis.Visualize(train, "Survived")
+    clas.learn(train)
+    #vis.Visualize(train, "Survived")
+

@@ -1,7 +1,5 @@
 import tensorflow as tf
 import numpy as np
-def sigmoid(x):
-    return(1/(1+tf.pow(np.e,x)))
 
 def learn(trainingSet):
 
@@ -15,13 +13,19 @@ def learn(trainingSet):
     #x = tf.placeholder( [None, 7])  # mnist data image of shape 28*28=784
     #y = tf.placeholder( [None, 1])
 
+
+
+    n= len(trainingSet.keys())
+    m= len(trainingSet[trainingSet.keys()[0]])
+
     # Set model weights
-    W = tf.Variable(tf.zeros([7, 1]))
-    b = tf.Variable(tf.zeros([1]))
+    trainngSetWithBias= tf.concat([tf.ones([1,trainingSet]),trainingSet],1)
+    W = tf.Variable(tf.zeros([n, 1]))
+    b = tf.Variable(tf.zeros([1,1]))
 
-    concatMatrix=tf.concat(W, b, 1)
+    Theta=tf.concat([W, b], 0)
 
-    pred = tf.nn.softmax(tf.matmul(trainingSet,concatMatrix ))  # Softmax
-    h= sigmoid(pred)
+    pred = tf.nn.softmax(tf.matmul(trainngSetWithBias,Theta ))  # Softmax
+    h= tf.sigmoid(pred)
 
 
