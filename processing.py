@@ -31,6 +31,10 @@ def processFeatures(train):
 if __name__ == "__main__":
     train = ps.read_csv("data/train.csv")
     train = processFeatures(train)
-    clas.learn(train)
+
+    test = ps.read_csv("data/test.csv")
+    test = processFeatures(test)
+
+    clas.learn(train,test)
     #vis.Visualize(train, "Survived")
 
